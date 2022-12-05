@@ -3,7 +3,7 @@ class RayEmitter
     constructor() 
     {
       this.pos = createVector(width / 2, height / 2);
-      this.ray = new Ray(this.pos, radians(random(360)));
+      this.ray = new Ray(this.pos, createVector(10, 5).normalize());
     }
   
     updatePos(x, y) 

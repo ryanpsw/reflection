@@ -16,5 +16,12 @@ class Mirror
       // draw it 
       line(this.a.x, this.a.y, this.b.x, this.b.y);
     }
+
+    // Reference: https://stackoverflow.com/questions/1243614/how-do-i-calculate-the-normal-vector-of-a-line-segment
+    getNormal()
+    {
+      let v = this.b.copy().sub(this.a);
+      return createVector(v.y, -v.x); // or (-v.y, v.x) 
+    }
   }
   

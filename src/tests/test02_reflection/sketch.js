@@ -4,7 +4,7 @@ let rayEmitter;
 
 function setup() 
 {
-  createCanvas(400, 400);
+  createCanvas(800, 600);
 
   let x1 = random(width);
   let x2 = random(width);
