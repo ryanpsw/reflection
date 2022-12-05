@@ -21,8 +21,7 @@ class LineHelper
 
     if(sol.z == 0)
     {
-      // No solution - result 'at infinity' in projective space.
-      return createVector(NaN, NaN);
+      return null;
     }
     else
     {
@@ -34,7 +33,7 @@ class LineHelper
       }
       
       // No solution - the intersection is NOT within the boundaries of both lines
-      return createVector(NaN, NaN);
+      return null;
     }
   }
 
