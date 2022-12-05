@@ -9,8 +9,8 @@ function setup() {
   stroke(0);
   strokeWeight(3);
 
-  line(v1.x, v1.y, v2.x, v2.y);
-  line(v3.x, v3.y, v4.x, v4.y);
+  LineRenderer.drawLine(v1, v2, false, false);
+  LineRenderer.drawLine(v3, v4, true, true);
 
   let crossPoint = LineHelper.getIntersection(v1, v2, v3, v4);
 
