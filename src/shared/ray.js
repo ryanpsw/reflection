@@ -44,6 +44,9 @@ class Ray
 
         for (let currentObstruction of obstructionsArray) 
         {
+            const intersectPoint = LineHelper.getIntersection(currentObstruction.a, currentObstruction.b, this.pos, endP);
+            const didIntersect = Vector2Helper.isValid(intersectPoint);
+
             switch (currentObstruction.className)
             {
                 //---------------------------------------------------------------------------------
@@ -53,9 +56,6 @@ class Ray
 
                     // If the ray is originated from a mirror, no need to check if it can reflect.
                     if(currentObstruction == this.originMirror) continue;
-
-                    const intersectPoint = LineHelper.getIntersection(currentObstruction.a, currentObstruction.b, this.pos, endP);
-                    const didIntersect = Vector2Helper.isValid(intersectPoint);
                     if(didIntersect)
                     {
                         this.curEndpoint = intersectPoint;
@@ -77,6 +77,24 @@ class Ray
                         this.reflectedRay = null; 
                     }
                     break; 
+                //---------------------------------------------------------------------------------
+                // WALL
+                //---------------------------------------------------------------------------------
+                case WALL_CLASS_NAME:
+                    if(didIntersect)
+                    {
+                        this.curEndpoint = intersectPoint;
+                        this.reflectedRay = null; 
+
+                        // No need to check other objects, exit the for loop. 
+                        return;
+                    } 
+                    else
+                    {
+                        this.curEndpoint = endP;
+                        this.reflectedRay = null; 
+                    }
+                    break;
             }
         }
     }
