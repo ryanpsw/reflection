@@ -1,9 +1,9 @@
 class RayEmitter
  {
-    constructor() 
+    constructor(pos, normalizedDirection) 
     {
-      this.pos = createVector(width / 2, height / 2);
-      this.ray = new Ray(this.pos, createVector(10, 5).normalize());
+      this.pos = pos;
+      this.ray = new Ray(this.pos, normalizedDirection);
     }
   
     updatePos(x, y) 

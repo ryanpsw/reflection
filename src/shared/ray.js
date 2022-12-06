@@ -1,4 +1,4 @@
-const _SCALAR = 300;
+const _SCALAR = 500;
 
 class Ray 
 {
@@ -51,6 +51,9 @@ class Ray
             let reflectionVector = this.dir.copy();
             reflectionVector.reflect(mirror.getNormal());
             this.reflectedRay = new Ray(intersectPoint, reflectionVector); 
+
+            let sub = mirrorArray.length > 1 ? subset(mirrorArray, 1, mirrorArray.length) : null;
+            this.reflectedRay.cast(sub);
         }
         else 
         {
