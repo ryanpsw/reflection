@@ -10,6 +10,7 @@ class Ray
         this.reflectedRay = null;
         this.originMirror = null;
 
+        this.shortestDistanceObstruction = null;
         this.shortestDistanceToObstruction = Infinity;
         this.shortestIntersectPoint = null;
     }
@@ -98,6 +99,8 @@ class Ray
                     this.reflectedRay.originMirror = obstruction;
                     this.reflectedRay.cast(obstructionsArray);
                 }
+
+                this.shortestDistanceObstruction = obstruction;
                 this.shortestDistanceToObstruction = curDistance;
                 this.shortestIntersectPoint = intersectPoint;
             }
@@ -108,16 +111,22 @@ class Ray
     {
         let endP = this.getEndPointNoObstruction();
 
-        if(this.shortestDistanceToObstruction!=Infinity && this.shortestIntersectPoint != null)
+        if(this.shortestDistanceToObstruction!=Infinity && this.shortestIntersectPoint != null && this.shortestDistanceObstruction != null)
         {
             this.curEndpoint = this.shortestIntersectPoint;
-        } 
+
+            if(this.shortestDistanceObstruction.className != MIRROR_CLASS_NAME)
+            {
+                this.reflectedRay = null;
+            }
+        }
         else
         {
             this.reflectedRay = null;
             this.curEndpoint = endP;
         }
 
+        // reset for next for loop
         this.shortestDistanceToObstruction = Infinity;
         this.shortestIntersectPoint = null;
     }
