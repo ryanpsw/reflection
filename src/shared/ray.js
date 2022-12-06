@@ -71,6 +71,8 @@ class Ray
                         this.reflectedRay.cast(obstructionsArray);
 
                         // No need to check other mirrors, exit the for loop. 
+                        this.shortestDistanceToAWallOrBox = Infinity;
+                        this.shortestIntersectPoint = null;
                         return;
                     } 
                     else
@@ -84,59 +86,55 @@ class Ray
                 // WALL
                 //---------------------------------------------------------------------------------
                 case WALL_CLASS_NAME:
-                    let intersectPoint2 = LineHelper.getIntersection(currentObstruction.a, currentObstruction.b, this.pos, endP);
-                    let didIntersect2 = Vector2Helper.isValid(intersectPoint2);
-
-                    if(didIntersect2)
-                    {
-                        this.curEndpoint = intersectPoint2;
-                        this.reflectedRay = null; 
-
-                        // No need to check other objects, exit the for loop. 
-                        return;
-                    } 
-                    else
-                    {
-                        this.curEndpoint = endP;
-                        this.reflectedRay = null; 
-                    }
+                    this.checkIntersect(currentObstruction);
                     break;
                 //---------------------------------------------------------------------------------
                 // BOX
                 //---------------------------------------------------------------------------------
                 case BOX_CLASS_NAME:
-                    this.reflectedRay = null; 
-
-                    let shortestDist = Infinity;
-                    let shortestIntersectPoint = null;
-
                     for (let wall of currentObstruction.walls) {
-
-                        let intersectPoint3 = LineHelper.getIntersection(wall.a, wall.b, this.pos, endP);
-                        let didIntersect3 = Vector2Helper.isValid(intersectPoint3);
-
-                        if(didIntersect3)
-                        {
-                            let curDist = p5.Vector.dist(this.pos, intersectPoint3);
-                            if(shortestDist > curDist) 
-                            {
-                                shortestDist = curDist;
-                                shortestIntersectPoint = intersectPoint3;
-                            }
-                        }
-                    }
-                    
-                    if(shortestDist!=Infinity && shortestIntersectPoint != null)
-                    {
-                        this.curEndpoint = shortestIntersectPoint;
-                    } 
-                    else
-                    {
-                        this.curEndpoint = endP;
+                        this.checkIntersect(wall);
                     }
                     break;
             }
         }
+
+        this.tryApplyShortestDistance();
+    }
+
+    checkIntersect(wall) 
+    {
+        let endP = this.getEndPointNoObstruction();
+        let intersectPoint = LineHelper.getIntersection(wall.a, wall.b, this.pos, endP);
+        let didIntersect = Vector2Helper.isValid(intersectPoint);
+
+        if(didIntersect)
+        {
+            let curDistance = p5.Vector.dist(this.pos, intersectPoint);
+            if(this.shortestDistanceToAWallOrBox > curDistance) 
+            {
+                this.shortestDistanceToAWallOrBox = curDistance;
+                this.shortestIntersectPoint = intersectPoint;
+            }
+        } 
+    }
+
+    tryApplyShortestDistance()
+    {
+        let endP = this.getEndPointNoObstruction();
+
+        if(this.shortestDistanceToAWallOrBox!=Infinity && this.shortestIntersectPoint != null)
+        {
+            this.curEndpoint = this.shortestIntersectPoint;
+        } 
+        else
+        {
+            this.reflectedRay = null;
+            this.curEndpoint = endP;
+        }
+
+        this.shortestDistanceToAWallOrBox = Infinity;
+        this.shortestIntersectPoint = null;
     }
   }
   

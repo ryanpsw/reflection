@@ -12,8 +12,9 @@ function setup()
   obstructions[3] = new Mirror(500, 80, 710, 70);
 
   obstructions[4] = new Wall(660, 420, 750, 420);
+  obstructions[5] = new Wall(370, 120, 460, 120);
 
-  obstructions[5] = new Box(720, 300, 50, 100);
+  obstructions[6] = new Box(720, 300, 50, 100);
 
   rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(15, 17).normalize());
 }
