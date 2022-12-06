@@ -25,7 +25,15 @@ class Box
     {
       // set color and weight 
       noStroke();
-      fill('red');
+
+      if(this.isBoxHit())
+      {
+        fill('red');
+      }
+      else
+      {
+        fill('green');
+      }
 
       rect(this.walls[0].a.x, this.walls[0].a.y, this.width, this.height);
       // draw it 
@@ -35,6 +43,26 @@ class Box
       }
       */
     
+    }
+
+    isBoxHit()
+    {
+      for (let wall of this.walls) {
+        if(wall.isHitByRay)
+        {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    resetWalls()
+    {
+      for (let wall of this.walls) 
+      {
+        wall.isHitByRay = false;
+      }
     }
   }
   

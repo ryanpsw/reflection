@@ -8,6 +8,7 @@ class Wall
       this.a = createVector(x1, y1);
       this.b = createVector(x2, y2);
       this.className = WALL_CLASS_NAME;
+      this.isHitByRay = false;
     }
   
     show() 

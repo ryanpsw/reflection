@@ -44,8 +44,6 @@ class Ray
     {
         if(obstructionsArray == null) return;
 
-        const endP = this.getEndPointNoObstruction();
-
         for (let currentObstruction of obstructionsArray) 
         {
             switch (currentObstruction.className)
@@ -118,6 +116,11 @@ class Ray
             if(this.shortestDistanceObstruction.className != MIRROR_CLASS_NAME)
             {
                 this.reflectedRay = null;
+            }
+
+            if(this.shortestDistanceObstruction.className == WALL_CLASS_NAME)
+            {
+                this.shortestDistanceObstruction.isHitByRay = true;
             }
         }
         else
