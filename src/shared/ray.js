@@ -26,7 +26,8 @@ class Ray
     {
         strokeWeight(5.0);
         stroke(0, 102, 153);
-        LineRenderer.drawLine(this.pos, this.curEndpoint, true, true);
+        let shouldShowArrow = this.reflectedRay == null;
+        LineRenderer.drawLine(this.pos, this.curEndpoint, true, shouldShowArrow);
 
         if(this.reflectedRay)
         {
