@@ -39,27 +39,34 @@ class Ray
     {
         if(mirrorArray == null) return;
         let mirror = mirrorArray[0];
-        const endP = this.getEndPointNoObstruction();
-        const intersectPoint = LineHelper.getIntersection(mirror.a, mirror.b, this.pos, endP);
 
-        const didIntersect = Vector2Helper.isValid(intersectPoint);
-        if(didIntersect)
+        switch(mirror.className)
         {
-            this.curEndpoint = intersectPoint;
-
-            // Reference: https://p5js.org/reference/#/p5.Vector/reflect
-            let reflectionVector = this.dir.copy();
-            reflectionVector.reflect(mirror.getNormal());
-            this.reflectedRay = new Ray(intersectPoint, reflectionVector); 
-
-            let sub = mirrorArray.length > 1 ? subset(mirrorArray, 1, mirrorArray.length) : null;
-            this.reflectedRay.cast(sub);
+            case MIRROR_CLASS_NAME: 
+                const endP = this.getEndPointNoObstruction();
+                const intersectPoint = LineHelper.getIntersection(mirror.a, mirror.b, this.pos, endP);
+        
+                const didIntersect = Vector2Helper.isValid(intersectPoint);
+                if(didIntersect)
+                {
+                    this.curEndpoint = intersectPoint;
+        
+                    // Reference: https://p5js.org/reference/#/p5.Vector/reflect
+                    let reflectionVector = this.dir.copy();
+                    reflectionVector.reflect(mirror.getNormal());
+                    this.reflectedRay = new Ray(intersectPoint, reflectionVector); 
+        
+                    let sub = mirrorArray.length > 1 ? subset(mirrorArray, 1, mirrorArray.length) : null;
+                    this.reflectedRay.cast(sub);
+                }
+                else 
+                {
+                    this.curEndpoint = endP;
+                    this.reflectedRay = null; 
+                }
+                break;
         }
-        else 
-        {
-            this.curEndpoint = endP;
-            this.reflectedRay = null; 
-        }
+
 
 
     }
