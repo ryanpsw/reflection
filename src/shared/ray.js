@@ -9,6 +9,9 @@ class Ray
         this.curEndpoint = this.getEndPointNoObstruction();
         this.reflectedRay = null;
         this.originMirror = null;
+
+        this.shortestDistanceToAWallOrBox = Infinity;
+        this.shortestIntersectPoint = null;
     }
   
     lookAt(x, y) 
@@ -44,15 +47,15 @@ class Ray
 
         for (let currentObstruction of obstructionsArray) 
         {
-            const intersectPoint = LineHelper.getIntersection(currentObstruction.a, currentObstruction.b, this.pos, endP);
-            const didIntersect = Vector2Helper.isValid(intersectPoint);
-
             switch (currentObstruction.className)
             {
                 //---------------------------------------------------------------------------------
                 // MIRROR
                 //---------------------------------------------------------------------------------
                 case MIRROR_CLASS_NAME:
+
+                    let intersectPoint = LineHelper.getIntersection(currentObstruction.a, currentObstruction.b, this.pos, endP);
+                    let didIntersect = Vector2Helper.isValid(intersectPoint);
 
                     // If the ray is originated from a mirror, no need to check if it can reflect.
                     if(currentObstruction == this.originMirror) continue;
@@ -81,9 +84,12 @@ class Ray
                 // WALL
                 //---------------------------------------------------------------------------------
                 case WALL_CLASS_NAME:
-                    if(didIntersect)
+                    let intersectPoint2 = LineHelper.getIntersection(currentObstruction.a, currentObstruction.b, this.pos, endP);
+                    let didIntersect2 = Vector2Helper.isValid(intersectPoint2);
+
+                    if(didIntersect2)
                     {
-                        this.curEndpoint = intersectPoint;
+                        this.curEndpoint = intersectPoint2;
                         this.reflectedRay = null; 
 
                         // No need to check other objects, exit the for loop. 
@@ -93,6 +99,40 @@ class Ray
                     {
                         this.curEndpoint = endP;
                         this.reflectedRay = null; 
+                    }
+                    break;
+                //---------------------------------------------------------------------------------
+                // BOX
+                //---------------------------------------------------------------------------------
+                case BOX_CLASS_NAME:
+                    this.reflectedRay = null; 
+
+                    let shortestDist = Infinity;
+                    let shortestIntersectPoint = null;
+
+                    for (let wall of currentObstruction.walls) {
+
+                        let intersectPoint3 = LineHelper.getIntersection(wall.a, wall.b, this.pos, endP);
+                        let didIntersect3 = Vector2Helper.isValid(intersectPoint3);
+
+                        if(didIntersect3)
+                        {
+                            let curDist = p5.Vector.dist(this.pos, intersectPoint3);
+                            if(shortestDist > curDist) 
+                            {
+                                shortestDist = curDist;
+                                shortestIntersectPoint = intersectPoint3;
+                            }
+                        }
+                    }
+                    
+                    if(shortestDist!=Infinity && shortestIntersectPoint != null)
+                    {
+                        this.curEndpoint = shortestIntersectPoint;
+                    } 
+                    else
+                    {
+                        this.curEndpoint = endP;
                     }
                     break;
             }
