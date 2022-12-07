@@ -48,39 +48,30 @@ class Ray
         {
             switch (currentObstruction.className)
             {
-                //---------------------------------------------------------------------------------
-                // MIRROR
-                //---------------------------------------------------------------------------------
                 case MIRROR_CLASS_NAME:
                     // If the ray is originated from a mirror, no need to check if it can reflect.
                     if(currentObstruction == this.originMirror) continue;
-
-                    this.checkIntersectWithObstruction(currentObstruction, true, obstructionsArray);
+                    this.checkIntersectWithObstruction(currentObstruction);
                     break; 
-                //---------------------------------------------------------------------------------
-                // WALL
-                //---------------------------------------------------------------------------------
+
                 case WALL_CLASS_NAME:
-                    this.checkIntersectWithObstruction(currentObstruction, false);
+                    this.checkIntersectWithObstruction(currentObstruction);
                     break;
-                //---------------------------------------------------------------------------------
-                // BOX
-                //---------------------------------------------------------------------------------
+                    
                 case BOX_CLASS_NAME:
                     for (let wall of currentObstruction.walls) {
-                        this.checkIntersectWithObstruction(wall, false);
+                        this.checkIntersectWithObstruction(wall);
                     }
                     break;
             }
         }
 
-        this.tryApplyShortestDistance();
+        this.tryApplyObstructionWithShortestDistance(obstructionsArray);
     }
 
-    checkIntersectWithObstruction(obstruction, isMirror, obstructionsArray) 
+    checkIntersectWithObstruction(obstruction) 
     {
-        let endP = this.getEndPointNoObstruction();
-        let intersectPoint = LineHelper.getIntersection(obstruction.a, obstruction.b, this.pos, endP);
+        let intersectPoint = LineHelper.getIntersection(obstruction.a, obstruction.b, this.pos, this.getEndPointNoObstruction());
         let didIntersect = Vector2Helper.isValid(intersectPoint);
 
         if(didIntersect)
@@ -88,16 +79,6 @@ class Ray
             let curDistance = p5.Vector.dist(this.pos, intersectPoint);
             if(this.shortestDistanceToObstruction > curDistance) 
             {
-                if(isMirror)
-                {
-                    // Reference: https://p5js.org/reference/#/p5.Vector/reflect
-                    let reflectionVector = this.dir.copy();
-                    reflectionVector.reflect(obstruction.getNormal());
-                    this.reflectedRay = new Ray(intersectPoint, reflectionVector); 
-                    this.reflectedRay.originMirror = obstruction;
-                    this.reflectedRay.cast(obstructionsArray);
-                }
-
                 this.shortestDistanceObstruction = obstruction;
                 this.shortestDistanceToObstruction = curDistance;
                 this.shortestIntersectPoint = intersectPoint;
@@ -105,28 +86,34 @@ class Ray
         } 
     }
 
-    tryApplyShortestDistance()
+    tryApplyObstructionWithShortestDistance(obstructionsArray)
     {
-        let endP = this.getEndPointNoObstruction();
-
         if(this.shortestDistanceToObstruction!=Infinity && this.shortestIntersectPoint != null && this.shortestDistanceObstruction != null)
         {
             this.curEndpoint = this.shortestIntersectPoint;
-
-            if(this.shortestDistanceObstruction.className != MIRROR_CLASS_NAME)
+            switch(this.shortestDistanceObstruction.className)
             {
-                this.reflectedRay = null;
-            }
-
-            if(this.shortestDistanceObstruction.className == WALL_CLASS_NAME)
-            {
-                this.shortestDistanceObstruction.isHitByRay = true;
+                case MIRROR_CLASS_NAME:
+                    // Reference: https://p5js.org/reference/#/p5.Vector/reflect
+                    let reflectionVector = this.dir.copy();
+                    reflectionVector.reflect(this.shortestDistanceObstruction.getNormal());
+                    this.reflectedRay = new Ray(this.shortestIntersectPoint, reflectionVector); 
+                    this.reflectedRay.originMirror = this.shortestDistanceObstruction;
+                    this.reflectedRay.cast(obstructionsArray);
+                    break;
+                case WALL_CLASS_NAME:
+                    this.shortestDistanceObstruction.isHitByRay = true;
+                    this.reflectedRay = null;
+                    break;
+                default:
+                    this.reflectedRay = null;
+                    break;    
             }
         }
         else
         {
             this.reflectedRay = null;
-            this.curEndpoint = endP;
+            this.curEndpoint = this.getEndPointNoObstruction();
         }
 
         // reset for next for loop
