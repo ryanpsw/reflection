@@ -20,8 +20,8 @@ function setup()
   obstructions[5] = new Wall(660, 420, 750, 420);
   obstructions[6] = new Wall(370, 120, 460, 120);
 
-  rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(5, 17).normalize());
-  //rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(random(100), random(100)).normalize());
+  // rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(5, 17).normalize(), true);
+  rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(random(100), random(100)).normalize(), true);
 }
 
 function draw() {

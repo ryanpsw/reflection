@@ -1,9 +1,10 @@
 class RayEmitter
  {
-    constructor(pos, normalizedDirection) 
+    constructor(pos, normalizedDirection, isRayVisible) 
     {
       this.pos = pos;
       this.ray = new Ray(this.pos, normalizedDirection);
+      this.isRayVisible = isRayVisible;
     }
   
     updatePos(x, y) 
@@ -22,7 +23,11 @@ class RayEmitter
       noStroke();
       fill(0);
       ellipse(this.pos.x, this.pos.y, 30);
-      this.ray.show();
+      
+      if(this.isRayVisible) 
+      {
+        this.ray.show();
+      }
     }
 
     resetAllWallsAndBoxes(obstructionsArray)
