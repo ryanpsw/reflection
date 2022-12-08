@@ -4,6 +4,10 @@ let rayEmitter;
 
 function preload() {
   imgGemSmall = loadImage('../../assets/gem_small.png');
+
+  imgEyeNormal = loadImage('../../assets/eye_normal.png');
+  imgEyeHit = loadImage('../../assets/eye_hit.png');
+
 }
 
 function setup() 
@@ -15,11 +19,13 @@ function setup()
   obstructions[1] = new Box(720, 300, 70, 50);
   */
   
+  let box = new Box(720, 300, imgEyeNormal.width, imgEyeNormal.height, imgEyeNormal, imgEyeHit);
+
   obstructions[0] = new Mirror(30, 380, 240, 390);
   obstructions[1] = new Mirror(200, 20, 410, 10);
   obstructions[2] = new Mirror(360, 420, 550, 400);
   obstructions[3] = new Mirror(500, 80, 710, 70);
-  obstructions[4] = new Box(720, 300, 50, 100);
+  obstructions[4] = box;
   obstructions[5] = new Wall(660, 420, 750, 420);
   obstructions[6] = new Wall(370, 120, 460, 120);
 

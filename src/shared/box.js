@@ -2,7 +2,7 @@ const BOX_CLASS_NAME = "Box";
 
 class Box
 {
-    constructor(x, y, width, height) 
+    constructor(x, y, width, height, imageNormal, imageHit) 
     {
       this.pos = createVector(x, y);
       this.walls = [];
@@ -19,30 +19,21 @@ class Box
       this.walls[3] = new Wall(x - halfWidth, y + halfHeight, x - halfWidth, y - halfHeight); // left wall
 
       this.className = BOX_CLASS_NAME;
+
+      this.imageNormal = imageNormal;
+      this.imageHit = imageHit;
     }
   
     show() 
     {
-      // set color and weight 
-      noStroke();
-
       if(this.isBoxHit())
       {
-        fill('red');
+        image(this.imageHit, this.pos.x - this.imageHit.width/2, this.pos.y - this.imageHit.height/2);
       }
       else
       {
-        fill('green');
+        image(this.imageNormal, this.pos.x - this.imageNormal.width/2, this.pos.y - this.imageNormal.height/2);
       }
-
-      rect(this.walls[0].a.x, this.walls[0].a.y, this.width, this.height);
-      // draw it 
-      /*
-      for (let wall of this.walls) {
-        wall.show();
-      }
-      */
-    
     }
 
     isBoxHit()
