@@ -1,6 +1,7 @@
 let obstructions = [];
 let ray;
 let rayEmitter;
+let hSlider;
 
 function preload() {
   imgGemSmall = loadImage('../../assets/gem_small.png');
@@ -8,6 +9,8 @@ function preload() {
   imgEyeNormal = loadImage('../../assets/eye_normal.png');
   imgEyeHit = loadImage('../../assets/eye_hit.png');
 
+  imgHandleV = loadImage('../../assets/handle_v.png');
+  imgHandleH = loadImage('../../assets/handle_h.png');
 }
 
 function setup() 
@@ -30,6 +33,9 @@ function setup()
   obstructions[6] = new Wall(370, 120, 460, 120);
 
   rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(5, 17).normalize(), true, imgGemSmall);
+
+  hSlider = new CustomSlider(300, 200, 500, 200, imgHandleH, false, true);
+  vSlider = new CustomSlider(10, 200, 10, 400, imgHandleV, true, true);
 }
 
 function draw() {
@@ -40,10 +46,24 @@ function draw() {
     obstruction.show();
   }
 
-  rayEmitter.updatePos(mouseX, mouseY);
+  //rayEmitter.updatePos(mouseX, mouseY);
   
   rayEmitter.look(obstructions);
   rayEmitter.show();
+
+  hSlider.updatePos();
+  hSlider.show();
+
+  vSlider.updatePos();
+  vSlider.show();
 }
 
+function mousePressed() {
+  hSlider.checkMousePressed();
+  vSlider.checkMousePressed();
+}
 
+function mouseReleased() {
+  hSlider.checkMouseReleased();
+  vSlider.checkMouseReleased();
+}
