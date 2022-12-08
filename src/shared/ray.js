@@ -29,10 +29,12 @@ class Ray
 
     show() 
     {
-        strokeWeight(5.0);
-        stroke(0, 102, 153);
+        strokeWeight(3.0);
+
+        let rayColor = color(255, 80, 60);
+        stroke(rayColor);
         let shouldShowArrow = this.reflectedRay == null;
-        LineRenderer.drawLine(this.pos, this.curEndpoint, true, shouldShowArrow);
+        LineRenderer.drawLine(this.pos, this.curEndpoint, false, shouldShowArrow, rayColor);
 
         if(this.reflectedRay)
         {

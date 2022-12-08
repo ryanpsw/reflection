@@ -1,35 +1,50 @@
 class LineRenderer
 {
-  static drawLine(v1, v2, isDashedLine, isPointyAtEnd)
+  static drawLine(v1, v2, isDashedLine, isPointyAtEnd, color)
   {
     push();
+
+    strokeCap(ROUND);
+    stroke(color);
+    fill(color);
 
     if(isDashedLine)
     {
         drawingContext.setLineDash([5, 7]);
     }
 
-    line(v1.x, v1.y, v2.x, v2.y);
+    if(isPointyAtEnd)
+    {
+      // Fix the line sticking out of the arrow problem!
+      let origV = v2.copy().sub(v1);
+      let newV2 = v1.copy().add(p5.Vector.mult(origV, (origV.mag()-15)/origV.mag()));
+      line(v1.x, v1.y, newV2.x, newV2.y);
+    }
+    else
+    {
+      line(v1.x, v1.y, v2.x, v2.y);
+    }
 
     drawingContext.setLineDash([]);
 
-    // Reference: https://stackoverflow.com/questions/44874243/drawing-arrows-in-p5js
     if(isPointyAtEnd)
     {
-        let offset = 15;
-
-        fill(0);
-
-        // this code is to make the arrow point
-        push() //start new drawing state
-        var angle = atan2(v1.y - v2.y, v1.x - v2.x); //gets the angle of the line
-        translate(v2.x, v2.y); //translates to the destination vertex
-        rotate(angle-HALF_PI); //rotates the arrow point
-        triangle(-offset*0.5, offset, offset*0.5, offset, 0, -offset/2); //draws the arrow point as a triangle
-        pop();
+      this.drawArrow(v1, v2.copy().sub(v1), color);
     }
 
     pop();
 
+  }
+  
+  static drawArrow(base, vec, myColor) {
+    push();
+    stroke(myColor);
+    fill(myColor);
+    translate(base.x, base.y);
+    rotate(vec.heading());
+    let arrowSize = 10;
+    translate(vec.mag() - arrowSize, 0);
+    triangle(-arrowSize, arrowSize / 2, -arrowSize, -arrowSize / 2, 0, 0);
+    pop();
   }
 }
