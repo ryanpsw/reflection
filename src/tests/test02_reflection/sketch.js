@@ -2,6 +2,10 @@ let obstructions = [];
 let ray;
 let rayEmitter;
 
+function preload() {
+  imgGemSmall = loadImage('../../assets/gem_small.png');
+}
+
 function setup() 
 {
   createCanvas(800, 600);
@@ -10,7 +14,6 @@ function setup()
   obstructions[0] = new Mirror(360, 420, 550, 400);
   obstructions[1] = new Box(720, 300, 70, 50);
   */
-
   
   obstructions[0] = new Mirror(30, 380, 240, 390);
   obstructions[1] = new Mirror(200, 20, 410, 10);
@@ -20,8 +23,7 @@ function setup()
   obstructions[5] = new Wall(660, 420, 750, 420);
   obstructions[6] = new Wall(370, 120, 460, 120);
 
-  // rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(5, 17).normalize(), true);
-  rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(random(100), random(100)).normalize(), true);
+  rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(5, 17).normalize(), true, imgGemSmall);
 }
 
 function draw() {
@@ -33,8 +35,6 @@ function draw() {
   }
 
   rayEmitter.updatePos(mouseX, mouseY);
-  
-  
   
   rayEmitter.look(obstructions);
   rayEmitter.show();
