@@ -11,6 +11,8 @@ function preload() {
 
   imgHandleV = loadImage('../../assets/handle_v.png');
   imgHandleH = loadImage('../../assets/handle_h.png');
+
+  imgDragMe = loadImage('../../assets/dragme.png');
 }
 
 function setup() 
@@ -38,7 +40,7 @@ function setup()
     true, 
     imgGemSmall, 
     true, 
-    imgHandleV);
+    imgDragMe);
 
   hSlider = new CustomSlider(10, 10, 150, 10, imgHandleH, false, true);
   vSlider = new CustomSlider(10, 200, 10, 400, imgHandleV, true, true);
@@ -64,7 +66,7 @@ function draw() {
   vSlider.updatePos();
   vSlider.show();
 
-  dial.updatePos();
+  dial.updatePos(dial.pos.x, dial.pos.y);
   dial.show();
 }
 

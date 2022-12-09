@@ -16,8 +16,14 @@ class CustomDial
         return this.circlePos.copy().sub(this.pos).normalize(); 
     }
 
-    updatePos()
+    updatePos(newX, newY)
     {
+        let diff = this.circlePos.copy().sub(this.pos);
+        this.pos.x = newX;
+        this.pos.y = newY;
+        this.circlePos.x = this.pos.x + diff.x;
+        this.circlePos.y = this.pos.y + diff.y;
+
         if(this.isDragging)
         {
             let v = createVector(mouseX, mouseY);
