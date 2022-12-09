@@ -1,16 +1,21 @@
 class RayEmitter
  {
-    constructor(pos, normalizedDirection, isRayVisible, image) 
+    constructor(pos, normalizedDirection, isRayVisible, image, shouldShowDial) 
     {
       this.pos = pos;
       this.ray = new Ray(this.pos, normalizedDirection);
       this.isRayVisible = isRayVisible;
       this.image = image;
+      this.dial = shouldShowDial ? new CustomDial(this.pos.x, this.pos.y, 80, false) : null;
     }
   
-    updatePos(x, y) 
+    updatePos() 
     {
-      this.pos.set(x, y);
+      if(this.dial) 
+      {
+        this.dial.updatePos();
+        this.ray.dir = this.dial.getNormalizedDir();
+      }
     }
   
     look(obstructionsArray) 
@@ -27,6 +32,8 @@ class RayEmitter
       }
 
       image(this.image, this.pos.x - this.image.width/2, this.pos.y - this.image.height/2);
+
+      if(this.dial) this.dial.show();
     }
 
     resetAllWallsAndBoxes(obstructionsArray)
@@ -42,6 +49,16 @@ class RayEmitter
           obstruction.resetWalls();
         }
       }
+    }
+
+    checkMousePressed()
+    {
+      if(this.dial) this.dial.checkMousePressed();
+    }
+
+    checkMouseReleased()
+    {
+      if(this.dial) this.dial.checkMouseReleased();
     }
   }
   

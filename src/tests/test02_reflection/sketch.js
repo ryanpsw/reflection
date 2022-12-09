@@ -32,9 +32,9 @@ function setup()
   obstructions[5] = new Wall(660, 420, 750, 420);
   obstructions[6] = new Wall(370, 120, 460, 120);
 
-  rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(5, 17).normalize(), true, imgGemSmall);
+  rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(5, 17).normalize(), true, imgGemSmall, true);
 
-  hSlider = new CustomSlider(300, 200, 500, 200, imgHandleH, false, true);
+  hSlider = new CustomSlider(10, 10, 150, 10, imgHandleH, false, true);
   vSlider = new CustomSlider(10, 200, 10, 400, imgHandleV, true, true);
 
   dial = new CustomDial(700, 500, 75, true);
@@ -48,8 +48,7 @@ function draw() {
     obstruction.show();
   }
 
-  //rayEmitter.updatePos(mouseX, mouseY);
-  
+  rayEmitter.updatePos();  
   rayEmitter.look(obstructions);
   rayEmitter.show();
 
@@ -67,10 +66,12 @@ function mousePressed() {
   hSlider.checkMousePressed();
   vSlider.checkMousePressed();
   dial.checkMousePressed();
+  rayEmitter.checkMousePressed();
 }
 
 function mouseReleased() {
   hSlider.checkMouseReleased();
   vSlider.checkMouseReleased();
   dial.checkMouseReleased();
+  rayEmitter.checkMouseReleased();
 }

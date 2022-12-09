@@ -11,6 +11,11 @@ class CustomDial
       this.shouldShowCenter = shouldShowCenter;
     }
 
+    getNormalizedDir()
+    {
+        return this.circlePos.copy().sub(this.pos).normalize(); 
+    }
+
     updatePos()
     {
         if(this.isDragging)
