@@ -22,7 +22,7 @@ class CustomDial
         {
             let v = createVector(mouseX, mouseY);
             let dir = v.sub(this.pos).normalize().mult(this.radius);
-
+    
             this.circlePos.x = this.pos.x + dir.x;
             this.circlePos.y = this.pos.y + dir.y;
         }

@@ -32,7 +32,13 @@ function setup()
   obstructions[5] = new Wall(660, 420, 750, 420);
   obstructions[6] = new Wall(370, 120, 460, 120);
 
-  rayEmitter = new RayEmitter(createVector(width/2, height/2), createVector(5, 17).normalize(), true, imgGemSmall, true);
+  rayEmitter = new RayEmitter(
+    createVector(width/2, height/2), 
+    createVector(5, 17).normalize(), 
+    true, 
+    imgGemSmall, 
+    true, 
+    imgHandleV);
 
   hSlider = new CustomSlider(10, 10, 150, 10, imgHandleH, false, true);
   vSlider = new CustomSlider(10, 200, 10, 400, imgHandleV, true, true);
