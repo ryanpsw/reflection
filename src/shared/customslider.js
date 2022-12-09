@@ -1,5 +1,3 @@
-const touchRadius = 120;
-
 class CustomSlider
 {
     constructor(x1, y1, x2, y2, imgHandle, isVertical, shouldShowBar) 
@@ -32,9 +30,6 @@ class CustomSlider
 
     show() 
     {
-        // for debugging touch area
-        // circle(this.pos.x, this.pos.y, touchRadius);
-
         if(this.shouldShowBar)
         {
             stroke('purple');
@@ -54,10 +49,19 @@ class CustomSlider
     checkMousePressed()
     {
         if(
-            mouseX > this.pos.x - touchRadius  && 
-            mouseX < this.pos.x + touchRadius && 
-            mouseY > this.pos.y - touchRadius && 
-            mouseY < this.pos.y + touchRadius
+            this.isVertical &&
+            mouseX > this.pos.x   && 
+            mouseX < this.pos.x + this.imgHandle.width  && 
+            mouseY > this.pos.y - this.imgHandle.height /2 && 
+            mouseY < this.pos.y + this.imgHandle.height /2
+
+            || 
+
+            !this.isVertical &&
+            mouseX > this.pos.x - this.imgHandle.width /2  && 
+            mouseX < this.pos.x + this.imgHandle.width /2  && 
+            mouseY > this.pos.y && 
+            mouseY < this.pos.y + this.imgHandle.height
         )  
         {
             this.isDragging = true;

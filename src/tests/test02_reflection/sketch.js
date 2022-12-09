@@ -36,6 +36,8 @@ function setup()
 
   hSlider = new CustomSlider(300, 200, 500, 200, imgHandleH, false, true);
   vSlider = new CustomSlider(10, 200, 10, 400, imgHandleV, true, true);
+
+  dial = new CustomDial(700, 500, 75, true);
 }
 
 function draw() {
@@ -56,14 +58,19 @@ function draw() {
 
   vSlider.updatePos();
   vSlider.show();
+
+  dial.updatePos();
+  dial.show();
 }
 
 function mousePressed() {
   hSlider.checkMousePressed();
   vSlider.checkMousePressed();
+  dial.checkMousePressed();
 }
 
 function mouseReleased() {
   hSlider.checkMouseReleased();
   vSlider.checkMouseReleased();
+  dial.checkMouseReleased();
 }
