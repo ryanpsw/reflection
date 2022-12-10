@@ -15,6 +15,11 @@ class RayEmitter
       this.isDragging = false;
     }
   
+    getChainedRayEndpoint()
+    {
+      return this.ray.getChainedRayEndpoint();
+    }
+
     updatePos() 
     {
       if(this.isDragging)

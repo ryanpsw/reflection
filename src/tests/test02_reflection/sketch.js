@@ -73,6 +73,13 @@ function draw() {
 
   dial.updatePos(dial.pos.x, dial.pos.y);
   dial.show();
+
+  if(box.isBoxHit())
+  {
+    fill('purple');
+    let v = this.rayEmitter.getChainedRayEndpoint();
+    circle(v.x, v.y, 30);
+  }
 }
 
 function mousePressed() {

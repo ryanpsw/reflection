@@ -27,6 +27,15 @@ class Ray
         return createVector(this.pos.x + this.dir.x * _SCALAR, this.pos.y + this.dir.y * _SCALAR);
     }
 
+    getChainedRayEndpoint()
+    {
+        if(this.reflectedRay)
+        {
+            return this.reflectedRay.getChainedRayEndpoint();
+        }
+        return this.curEndpoint;
+    }
+
     show() 
     {
         strokeWeight(3.0);
