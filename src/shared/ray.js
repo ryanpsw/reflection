@@ -1,4 +1,4 @@
-const _SCALAR = 500;
+const _SCALAR = 410;
 
 class Ray 
 {

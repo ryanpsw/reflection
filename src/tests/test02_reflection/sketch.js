@@ -1,8 +1,3 @@
-let obstructions = [];
-let ray;
-let rayEmitter;
-let hSlider;
-
 function preload() {
   imgGemSmall = loadImage('../../assets/gem_small.png');
 
@@ -36,16 +31,16 @@ function setup()
 
   rayEmitter = new RayEmitter(
     createVector(width/2, height/2), 
-    createVector(5, 17).normalize(), 
+    createVector(1, -1).normalize(), 
     true, 
     imgGemSmall, 
     true, 
     imgDragMe);
 
-  hSlider = new CustomSlider(10, 10, 150, 10, imgHandleH, false, true);
+  hSlider = new CustomSlider(510, 10, 650, 10, imgHandleH, false, true);
   vSlider = new CustomSlider(10, 200, 10, 400, imgHandleV, true, true);
 
-  dial = new CustomDial(700, 500, 75, true);
+  dial = new CustomDial(700, 500, 75, true, 3*PI/4);
 }
 
 function draw() {

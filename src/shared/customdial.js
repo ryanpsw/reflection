@@ -2,11 +2,11 @@ const touchRadius = 30;
 
 class CustomDial
 {
-    constructor(x, y, radius, shouldShowCenter) 
+    constructor(x, y, radius, shouldShowCenter, initialRadian) 
     {
       this.pos = createVector(x, y); 
       this.radius = radius;
-      this.circlePos = this.pos.copy().add(p5.Vector.fromAngle(PI/4).mult(this.radius));
+      this.circlePos = this.pos.copy().add(p5.Vector.fromAngle(initialRadian).mult(this.radius));
       this.isDragging = false;
       this.shouldShowCenter = shouldShowCenter;
     }

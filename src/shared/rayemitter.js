@@ -8,7 +8,9 @@ class RayEmitter
       this.ray = new Ray(this.pos, normalizedDirection);
       this.isRayVisible = isRayVisible;
       this.image = image;
-      this.dial = shouldShowDial ? new CustomDial(this.pos.x, this.pos.y, 80, false) : null;
+
+      let radianAngleDir = normalizedDirection.angleBetween(createVector(1, 0));
+      this.dial = shouldShowDial ? new CustomDial(this.pos.x, this.pos.y, 80, false, radianAngleDir) : null;
       this.imgDragHandle = imgDragMe;
       this.isDragging = false;
     }
