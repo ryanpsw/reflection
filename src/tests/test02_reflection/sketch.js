@@ -14,13 +14,17 @@ function setup()
 {
   createCanvas(800, 600);
 
+  let a = createA('index.html', 'Next Page');
+  a.position(700, 550);
+
   /*
   obstructions[0] = new Mirror(360, 420, 550, 400);
   obstructions[1] = new Box(720, 300, 70, 50);
   */
   
-  let box = new Box(720, 300, imgEyeNormal.width, imgEyeNormal.height, imgEyeNormal, imgEyeHit);
+  box = new Box(720, 300, imgEyeNormal.width, imgEyeNormal.height, imgEyeNormal, imgEyeHit);
 
+  obstructions = [];
   obstructions[0] = new Mirror(30, 380, 240, 390);
   obstructions[1] = new Mirror(200, 20, 410, 10);
   obstructions[2] = new Mirror(360, 420, 550, 400);
@@ -46,6 +50,12 @@ function setup()
 function draw() {
   clear();
   background(255);
+
+  textSize(18);
+  fill('black');
+  textStyle(NORMAL);
+  textWrap(WORD);
+  text('0X. \nText \nMore Text Here', 30, 30, width-50);
 
   for (let obstruction of obstructions) {
     obstruction.show();
