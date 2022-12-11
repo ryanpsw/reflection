@@ -46,7 +46,7 @@ function setup()
 
   dial = new CustomDial(700, 500, 75, true, 3*PI/4);
 
-  virtualRay = new VirtualRay(rayEmitter, box, true);
+  virtualRay = new VirtualRay(rayEmitter, box, true, 120); // 120 is 'x'
 }
 
 function draw() 

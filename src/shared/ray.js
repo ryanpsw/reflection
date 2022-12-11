@@ -2,10 +2,11 @@ const _SCALAR = 500;
 
 class Ray 
 {
-    constructor(pos, dir) 
+    constructor(pos, dir, charNum) 
     {
         this.pos = pos;
         this.dir = dir;
+        this.charNum = charNum; 
         this.curEndpoint = this.getEndPointNoObstruction();
         this.reflectedRay = null;
         this.originMirror = null;
@@ -82,6 +83,12 @@ class Ray
         {
             this.reflectedRay.show();
         }
+
+        if(this.charNum != null)
+        {
+            let midPoint = createVector((this.pos.x + this.curEndpoint.x) /2, (this.pos.y + this.curEndpoint.y) /2);
+            LineRenderer.drawLetter(midPoint, this.charNum, rayColor);
+        }
     }
   
     cast(obstructionsArray) 
@@ -141,7 +148,8 @@ class Ray
                     // Reference: https://p5js.org/reference/#/p5.Vector/reflect
                     let reflectionVector = this.dir.copy();
                     reflectionVector.reflect(this.shortestDistanceObstruction.getNormal());
-                    this.reflectedRay = new Ray(this.shortestIntersectPoint, reflectionVector); 
+                    let nextCharNum = this.charNum ? this.charNum + 1 : null;
+                    this.reflectedRay = new Ray(this.shortestIntersectPoint, reflectionVector, nextCharNum); 
                     this.reflectedRay.originMirror = this.shortestDistanceObstruction;
                     this.reflectedRay.cast(obstructionsArray);
                     break;

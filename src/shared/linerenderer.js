@@ -47,4 +47,14 @@ class LineRenderer
     triangle(-arrowSize, arrowSize / 2, -arrowSize, -arrowSize / 2, 0, 0);
     pop();
   }
+
+  static drawLetter(pos, charNum, color)
+  {
+    push();
+    noStroke();
+    fill(color);
+    textStyle(ITALIC);
+    text(char(charNum), pos.x - 15 , pos.y - 15);
+    pop();
+  }
 }

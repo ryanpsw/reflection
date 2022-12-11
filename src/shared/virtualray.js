@@ -1,10 +1,11 @@
 class VirtualRay
 {
-    constructor(rayEmitter, box, willFlipUpsideDownIfApplicable)
+    constructor(rayEmitter, box, willFlipUpsideDownIfApplicable, charNum)
     {
         this.rayEmitter = rayEmitter;
         this.box = box;
         this.willFlipUpsideDownIfApplicable = willFlipUpsideDownIfApplicable;
+        this.charNum = charNum; // 65 is A, 66 is B, null means don't show char.
     }
 
     tryShow()
@@ -28,6 +29,12 @@ class VirtualRay
         
             LineRenderer.drawLine(invertedDir, endpoint, true, true, c);
         
+            if(this.charNum != null)
+            {
+                let midPoint = createVector((invertedDir.x + endpoint.x) /2, (invertedDir.y + endpoint.y) /2);
+                LineRenderer.drawLetter(midPoint, this.charNum, c);
+            }
+
             let picX = invertedDir.x - imgGemSmall.width/2;
             let picY = invertedDir.y - imgGemSmall.height/2;
         

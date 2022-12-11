@@ -32,7 +32,7 @@ function setup()
     true, 
     imgDragMe);
 
-  virtualRay = new VirtualRay(rayEmitter, box, true);
+  virtualRay = new VirtualRay(rayEmitter, box, true, 120); // 120 is 'x'
 }
 
 function draw() {

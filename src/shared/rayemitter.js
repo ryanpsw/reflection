@@ -5,12 +5,12 @@ class RayEmitter
     constructor(pos, normalizedDirection, isRayVisible, image, shouldShowDial, imgDragMe) 
     {
       this.pos = pos;
-      this.ray = new Ray(this.pos, normalizedDirection);
+      this.ray = new Ray(this.pos, normalizedDirection, 97); // 97 is 'a'
       this.isRayVisible = isRayVisible;
       this.image = image;
 
       let radianAngleDir = normalizedDirection.angleBetween(createVector(1, 0));
-      this.dial = shouldShowDial ? new CustomDial(this.pos.x, this.pos.y, 80, false, radianAngleDir) : null;
+      this.dial = shouldShowDial ? new CustomDial(this.pos.x, this.pos.y, 90, false, radianAngleDir) : null;
       this.imgDragHandle = imgDragMe;
       this.isDragging = false;
     }
