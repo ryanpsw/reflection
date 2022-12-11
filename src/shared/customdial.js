@@ -44,10 +44,10 @@ class CustomDial
             circle(this.pos.x, this.pos.y, 3);
         }
 
-        fill(181, 181, 181);
+        fill(181, 181, 181, 70);
         circle(this.circlePos.x, this.circlePos.y, 50);
 
-        fill(207, 90, 69);
+        fill(207, 90, 69, 70);
         circle(this.circlePos.x, this.circlePos.y, 32);
     }
 

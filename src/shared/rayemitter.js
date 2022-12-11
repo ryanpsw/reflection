@@ -10,7 +10,7 @@ class RayEmitter
       this.image = image;
 
       let radianAngleDir = normalizedDirection.angleBetween(createVector(1, 0));
-      this.dial = shouldShowDial ? new CustomDial(this.pos.x, this.pos.y, 90, false, radianAngleDir) : null;
+      this.dial = shouldShowDial ? new CustomDial(this.pos.x, this.pos.y, 70, false, radianAngleDir) : null;
       this.imgDragHandle = imgDragMe;
       this.isDragging = false;
     }
