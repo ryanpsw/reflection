@@ -1,4 +1,4 @@
-const _SCALAR = 410;
+const _SCALAR = 500;
 
 class Ray 
 {
@@ -34,6 +34,24 @@ class Ray
             return this.reflectedRay.getChainedRayEndpoint();
         }
         return this.curEndpoint;
+    }
+
+    getChainedRayLast()
+    {
+        if(this.reflectedRay)
+        {
+            return this.reflectedRay.getChainedRayLast();
+        }
+        return this;
+    }
+
+    getChainedRayNum()
+    {
+        if(this.reflectedRay)
+        {
+            return this.reflectedRay.getChainedRayNum()+1;
+        }
+        return 1;
     }
 
     show() 

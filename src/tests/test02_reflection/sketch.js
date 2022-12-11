@@ -77,8 +77,15 @@ function draw() {
   if(box.isBoxHit())
   {
     fill('purple');
-    let v = this.rayEmitter.getChainedRayEndpoint();
-    circle(v.x, v.y, 30);
+    let endpoint = this.rayEmitter.getChainedRayEndpoint();
+    circle(endpoint.x, endpoint.y, 30);
+
+    let lastRay = this.rayEmitter.getChainedRayLast();
+    let scalar = 100; // TODO
+    let invertedDir = createVector(lastRay.pos.x + lastRay.dir.x * -scalar, lastRay.pos.y + lastRay.dir.y * -scalar);
+
+    console.log(rayEmitter.getChainedRayNum());
+    LineRenderer.drawLine(endpoint, invertedDir, true, true, 'purple');
   }
 }
 

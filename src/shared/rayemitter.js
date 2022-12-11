@@ -20,6 +20,16 @@ class RayEmitter
       return this.ray.getChainedRayEndpoint();
     }
 
+    getChainedRayLast()
+    {
+      return this.ray.getChainedRayLast();
+    }
+
+    getChainedRayNum()
+    {
+      return this.ray.getChainedRayNum();
+    }
+
     updatePos() 
     {
       if(this.isDragging)
