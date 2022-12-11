@@ -32,6 +32,7 @@ function setup()
     true, 
     imgDragMe);
 
+  virtualRay = new VirtualRay(rayEmitter, box, true);
 }
 
 function draw() {
@@ -51,6 +52,8 @@ function draw() {
   rayEmitter.updatePos();  
   rayEmitter.look(obstructions);
   rayEmitter.show();
+
+  virtualRay.tryShow();
 }
 
 function mousePressed() {

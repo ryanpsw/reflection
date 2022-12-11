@@ -18,8 +18,9 @@ class VirtualRay
           {
             let c = color(130, 130, 130, 155);
             fill(c);
+
             let endpoint = this.rayEmitter.getChainedRayEndpoint();
-            circle(endpoint.x, endpoint.y, 10);
+            //circle(endpoint.x, endpoint.y, 10);
         
             let lastRay = this.rayEmitter.getChainedRayLast();
             let scalar = this.rayEmitter.getChainedMagnitude();
@@ -43,7 +44,10 @@ class VirtualRay
             }
             else 
             {
+                push();
+                tint(255, 125);
                 image(imgGemSmall, picX, picY);
+                pop();
             }
           }
         }
