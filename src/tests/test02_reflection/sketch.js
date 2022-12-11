@@ -76,29 +76,35 @@ function draw() {
 
   if(box.isBoxHit())
   {
-    fill('purple');
-    let endpoint = this.rayEmitter.getChainedRayEndpoint();
-    circle(endpoint.x, endpoint.y, 10);
+    let chainedRaysNum = rayEmitter.getChainedRayNum();
 
-    let lastRay = this.rayEmitter.getChainedRayLast();
-    let scalar = this.rayEmitter.getChainedMagnitude();
-    let invertedDir = createVector(lastRay.pos.x + lastRay.dir.x * -scalar, lastRay.pos.y + lastRay.dir.y * -scalar);
-
-    LineRenderer.drawLine(invertedDir, endpoint, true, true, 'purple');
-
-    let picX = invertedDir.x - imgGemSmall.width/2;
-    let picY = invertedDir.y - imgGemSmall.height/2;
-    if(rayEmitter.getChainedRayNum() % 2 ==1)
+    if(chainedRaysNum > 1)
     {
-      image(imgGemSmall, picX, picY);
-    }
-    else 
-    {
-      push();
-      translate(picX, picY);
-      rotate(PI);
-      image(imgGemSmall, -imgGemSmall.width, -imgGemSmall.height);
-      pop();
+      fill('purple');
+      let endpoint = this.rayEmitter.getChainedRayEndpoint();
+      circle(endpoint.x, endpoint.y, 10);
+  
+      let lastRay = this.rayEmitter.getChainedRayLast();
+      let scalar = this.rayEmitter.getChainedMagnitude();
+      let invertedDir = createVector(lastRay.pos.x + lastRay.dir.x * -scalar, lastRay.pos.y + lastRay.dir.y * -scalar);
+  
+      LineRenderer.drawLine(invertedDir, endpoint, true, true, 'purple');
+  
+      let picX = invertedDir.x - imgGemSmall.width/2;
+      let picY = invertedDir.y - imgGemSmall.height/2;
+  
+      if(chainedRaysNum % 2 ==1)
+      {
+        image(imgGemSmall, picX, picY);
+      }
+      else 
+      {
+        push();
+        translate(picX, picY);
+        rotate(PI);
+        image(imgGemSmall, -imgGemSmall.width, -imgGemSmall.height);
+        pop();
+      }
     }
   }
 }
