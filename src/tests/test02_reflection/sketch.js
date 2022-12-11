@@ -47,18 +47,15 @@ function setup()
   dial = new CustomDial(700, 500, 75, true, 3*PI/4);
 
   virtualRay = new VirtualRay(rayEmitter, box, true, 120); // 120 is 'x'
+
+  formulaStr = "";
 }
 
 function draw() 
 {
   clear();
   background(255);
-
-  textSize(18);
-  fill('black');
-  textStyle(NORMAL);
-  textWrap(WORD);
-  text('0X. \nText \nMore Text Here', 30, 30, width-50);
+  TextUtil.setSlideText('0X. \nText \nMore Text Here\n' + formulaStr);
 
   for (let obstruction of obstructions) {
     obstruction.show();
@@ -78,6 +75,8 @@ function draw()
   dial.show();
 
   virtualRay.tryShow();
+
+  formulaStr = TextUtil.getLineSegmentFormula(rayEmitter, virtualRay, box);
 }
 
 function mousePressed() {
@@ -93,3 +92,4 @@ function mouseReleased() {
   dial.checkMouseReleased();
   rayEmitter.checkMouseReleased();
 }
+

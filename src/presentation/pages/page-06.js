@@ -17,7 +17,7 @@ function setup()
   let a = createA('../../tests/test02_reflection/index.html', 'Next Page');
   a.position(700, 550);
 
-  let box = new Box(100, 480, imgEyeNormal.width, imgEyeNormal.height, imgEyeNormal, imgEyeHit);
+  box = new Box(100, 480, imgEyeNormal.width, imgEyeNormal.height, imgEyeNormal, imgEyeHit);
 
   obstructions = [];
   obstructions[0] = new Mirror(170, 350, 300, 350);
@@ -33,17 +33,15 @@ function setup()
     imgDragMe);
 
   virtualRay = new VirtualRay(rayEmitter, box, true, 120); // 120 is 'x'
+
+  formulaStr = "";
 }
 
 function draw() {
   clear();
   background('rgb(240,240,240)');
 
-  textSize(18);
-  fill('black');
-  textStyle(NORMAL);
-  textWrap(WORD);
-  text('06. \nNow let\'s try with 2 mirrors. \nAdjust the gem and its ray until the ray hits the eye:', 30, 30, width-50);
+  TextUtil.setSlideText('06. \nNow let\'s try with 2 mirrors. \nAdjust the gem and its ray until the ray hits the eye:\n\n' + formulaStr);
 
   for (let obstruction of obstructions) {
     obstruction.show();
@@ -54,6 +52,7 @@ function draw() {
   rayEmitter.show();
 
   virtualRay.tryShow();
+  formulaStr = TextUtil.getLineSegmentFormula(rayEmitter, virtualRay, box);
 }
 
 function mousePressed() {

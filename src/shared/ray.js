@@ -70,6 +70,20 @@ class Ray
         return v.mag();
     }
 
+    getChainedCharNums(charNumsArray)
+    {
+        if(this.charNum)
+        {
+            append(charNumsArray, this.charNum);
+        }
+
+        if(this.reflectedRay)
+        {
+            this.reflectedRay.getChainedCharNums(charNumsArray);
+        }
+        return charNumsArray;
+    }
+
     show() 
     {
         strokeWeight(3.0);

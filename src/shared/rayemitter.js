@@ -35,6 +35,13 @@ class RayEmitter
       return this.ray.getChainedMagnitude();
     }
     
+    getChainedCharNums()
+    {
+      let charNums = [];
+      this.ray.getChainedCharNums(charNums);
+      return charNums;
+    }
+
     updatePos() 
     {
       if(this.isDragging)
@@ -69,7 +76,6 @@ class RayEmitter
 
       if(this.imgDragHandle)
       {
-        let shiftX = 0;
         image(this.imgDragHandle, this.pos.x - 18, this.pos.y - this.imgDragHandle.height/2 - 46);
       }
     }
