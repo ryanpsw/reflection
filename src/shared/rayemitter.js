@@ -30,6 +30,11 @@ class RayEmitter
       return this.ray.getChainedRayNum();
     }
 
+    getChainedMagnitude()
+    {
+      return this.ray.getChainedMagnitude();
+    }
+    
     updatePos() 
     {
       if(this.isDragging)

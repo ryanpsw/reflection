@@ -54,6 +54,21 @@ class Ray
         return 1;
     }
 
+    getChainedMagnitude()
+    {
+        if(this.reflectedRay)
+        {
+            return this.reflectedRay.getChainedMagnitude() + this.getMagnitude();
+        }
+        return 0;
+    }
+
+    getMagnitude()
+    {
+        let v = this.curEndpoint.copy().sub(this.pos);
+        return v.mag();
+    }
+
     show() 
     {
         strokeWeight(3.0);

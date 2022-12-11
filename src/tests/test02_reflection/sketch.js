@@ -27,7 +27,7 @@ function setup()
   obstructions = [];
   obstructions[0] = new Mirror(30, 380, 240, 390);
   obstructions[1] = new Mirror(200, 20, 410, 10);
-  obstructions[2] = new Mirror(360, 420, 550, 400);
+  obstructions[2] = new Mirror(360, 400, 550, 400);
   obstructions[3] = new Mirror(500, 80, 710, 70);
   obstructions[4] = box;
   obstructions[5] = new Wall(660, 420, 750, 420);
@@ -78,14 +78,28 @@ function draw() {
   {
     fill('purple');
     let endpoint = this.rayEmitter.getChainedRayEndpoint();
-    circle(endpoint.x, endpoint.y, 30);
+    circle(endpoint.x, endpoint.y, 10);
 
     let lastRay = this.rayEmitter.getChainedRayLast();
-    let scalar = 100; // TODO
+    let scalar = this.rayEmitter.getChainedMagnitude();
     let invertedDir = createVector(lastRay.pos.x + lastRay.dir.x * -scalar, lastRay.pos.y + lastRay.dir.y * -scalar);
 
-    console.log(rayEmitter.getChainedRayNum());
-    LineRenderer.drawLine(endpoint, invertedDir, true, true, 'purple');
+    LineRenderer.drawLine(invertedDir, endpoint, true, true, 'purple');
+
+    let picX = invertedDir.x - imgGemSmall.width/2;
+    let picY = invertedDir.y - imgGemSmall.height/2;
+    if(rayEmitter.getChainedRayNum() % 2 ==1)
+    {
+      image(imgGemSmall, picX, picY);
+    }
+    else 
+    {
+      push();
+      translate(picX, picY);
+      rotate(PI);
+      image(imgGemSmall, -imgGemSmall.width, -imgGemSmall.height);
+      pop();
+    }
   }
 }
 
