@@ -32,7 +32,7 @@ function setup()
     true, 
     imgDragMe);
 
-  virtualRay = new VirtualRay(rayEmitter, box, true, 120); // 120 is 'x'
+  virtualRay = new VirtualRay(rayEmitter, box, false, 120); // 120 is 'x'
 
   formulaStr = "";
 }

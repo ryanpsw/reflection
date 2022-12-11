@@ -23,7 +23,7 @@ class TextUtil
     static setSlideText(str)
     {
         push();
-        textSize(18);
+        textSize(20);
         fill('black');
         textStyle(NORMAL);
         textWrap(WORD);
