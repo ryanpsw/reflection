@@ -14,8 +14,7 @@ function setup()
 {
   createCanvas(800, 600);
 
-  let a = createA('../../tests/test02_reflection/index.html', 'Next Page');
-  a.position(700, 550);
+  TextUtil.setNextPageHyperLink('07');
 
   box = new Box(100, 480, imgEyeNormal.width, imgEyeNormal.height, imgEyeNormal, imgEyeHit);
 

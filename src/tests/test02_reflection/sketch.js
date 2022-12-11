@@ -14,8 +14,7 @@ function setup()
 {
   createCanvas(800, 600);
 
-  let a = createA('index.html', 'Next Page');
-  a.position(700, 550);
+  TextUtil.setNextPageHyperLink('00');
 
   /*
   obstructions[0] = new Mirror(360, 420, 550, 400);

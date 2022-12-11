@@ -30,4 +30,10 @@ class TextUtil
         text(str, 30, 30, width-50);
         pop();
     }
+
+    static setNextPageHyperLink(nextPageNumStr)
+    {
+        let a = createA('page-'+ nextPageNumStr+'.html', 'Next Page');
+        a.position(700, 550);
+    }
 }
