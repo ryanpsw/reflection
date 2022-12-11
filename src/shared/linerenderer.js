@@ -7,6 +7,7 @@ class LineRenderer
     strokeCap(ROUND);
     stroke(color);
     fill(color);
+    tint(255, 125);
 
     if(isDashedLine)
     {

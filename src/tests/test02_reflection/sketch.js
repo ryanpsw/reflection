@@ -80,7 +80,8 @@ function draw() {
 
     if(chainedRaysNum > 1)
     {
-      fill('purple');
+      let c = color(130, 130, 130, 155);
+      fill(c);
       let endpoint = this.rayEmitter.getChainedRayEndpoint();
       circle(endpoint.x, endpoint.y, 10);
   
@@ -88,7 +89,7 @@ function draw() {
       let scalar = this.rayEmitter.getChainedMagnitude();
       let invertedDir = createVector(lastRay.pos.x + lastRay.dir.x * -scalar, lastRay.pos.y + lastRay.dir.y * -scalar);
   
-      LineRenderer.drawLine(invertedDir, endpoint, true, true, 'purple');
+      LineRenderer.drawLine(invertedDir, endpoint, true, true, c);
   
       let picX = invertedDir.x - imgGemSmall.width/2;
       let picY = invertedDir.y - imgGemSmall.height/2;
@@ -102,6 +103,7 @@ function draw() {
         push();
         translate(picX, picY);
         rotate(PI);
+        tint(255, 125);
         image(imgGemSmall, -imgGemSmall.width, -imgGemSmall.height);
         pop();
       }
