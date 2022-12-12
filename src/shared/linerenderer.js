@@ -55,7 +55,7 @@ class LineRenderer
     fill(color);
     textSize(24);
     textStyle(ITALIC);
-    text(char(charNum), pos.x - 20 , pos.y - 20);
+    text(char(charNum), pos.x - 23 , pos.y - 20);
     pop();
   }
 }

@@ -29,7 +29,7 @@ function setup()
     imgGemSmall, //image
     false, //shouldShowDial
     null, //imgDragMe
-    false); // shouldShowLetter
+    null); // shouldShowLetterCharNum
 
     vSlider = new CustomSlider(340, 200, 340, 370, imgHandleV, true, false);
 

@@ -24,13 +24,13 @@ function setup()
   obstructions[2] = eye;
 
   rayEmitter = new RayEmitter(
-    createVector(400, 210), 
-    createVector(0, -1).normalize(), 
-    true, 
-    imgGemSmall, 
-    true, 
-    null,
-    true);
+    createVector(400, 210), // pos
+    createVector(0, -1).normalize(), // normalizedDirection
+    true, //isRayVisible
+    imgGemSmall, //image
+    true, //shouldShowDial
+    null, //imgDragMe
+    97); // shouldShowLetterCharNum, 97 is 'a'
 
   virtualRay = new VirtualRay(rayEmitter, eye, false, 120); // 120 is 'x'
 

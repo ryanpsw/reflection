@@ -39,7 +39,7 @@ function setup()
     imgGemSmall, //image
     true, //shouldShowDial
     imgDragMe,//imgDragMe
-    true); // shouldShowLetter
+    97); // shouldShowLetterCharNum, 97 is 'a'
 
   hSlider = new CustomSlider(510, 10, 650, 10, imgHandleH, false, true);
   vSlider = new CustomSlider(10, 200, 10, 400, imgHandleV, true, true);

@@ -29,7 +29,7 @@ function setup()
     imgGemSmall, //image
     false, //shouldShowDial
     null, //imgDragMe
-    false); // shouldShowLetter
+    null); // shouldShowLetterCharNum
 }
 
 function draw() {

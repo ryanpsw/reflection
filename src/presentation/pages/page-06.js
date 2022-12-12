@@ -30,7 +30,7 @@ function setup()
     imgGemSmall, //image
     true, //shouldShowDial
     imgDragMe, //imgDragMe
-    true); // shouldShowLetter
+    97); // shouldShowLetterCharNum, 97 is 'a'
 
   virtualRay = new VirtualRay(rayEmitter, eye, false, 120); // 120 is 'x'
 
