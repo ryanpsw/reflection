@@ -1,3 +1,6 @@
+const CANVAS_WIDTH = 800;
+const CANVAS_HEIGHT = 700;
+
 class Vector2Helper
 {
   static isValid(v2)

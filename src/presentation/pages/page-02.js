@@ -13,7 +13,7 @@ function preload() {
 
 function setup() 
 {
-  createCanvas(800, 600);
+  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 
   TextUtil.setNextPageHyperLink('03');
   TextUtil.setPrevPageHyperLink('01');

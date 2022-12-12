@@ -12,9 +12,8 @@ function preload() {
 
 function setup() 
 {
-  createCanvas(800, 600);
+  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 
-  //TextUtil.setNextPageHyperLink('07');
   TextUtil.setPrevPageHyperLink('06');
 
   eye = new Box(400, 420, imgEyeNormal.width, imgEyeNormal.height, imgEyeNormal, imgEyeHit);
