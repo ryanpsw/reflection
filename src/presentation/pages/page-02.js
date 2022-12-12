@@ -40,7 +40,7 @@ function draw() {
   clear();
   background('rgb(240,240,240)');
 
-  TextUtil.setSlideText('02. \nYou feel the object gets bigger when it is closer to your eye.\n\n');
+  TextUtil.setSlideText('02. \nYou feel the object gets bigger when it is closer to your eye. Try dragging the handle next to the gem now.\n\n');
 
   for (let obstruction of obstructions) {
     obstruction.show();

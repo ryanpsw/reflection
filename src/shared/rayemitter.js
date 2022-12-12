@@ -44,7 +44,7 @@ class RayEmitter
 
     updatePos() 
     {
-      if(this.imgDragHandle && this.isDragging)
+      if(this.imgDragHandle && this.isDragging && this.isWithinBound())
       {
           this.pos.x = mouseX;
           this.pos.y = mouseY;
@@ -55,6 +55,12 @@ class RayEmitter
         this.dial.updatePos(this.pos.x, this.pos.y);
         this.ray.dir = this.dial.getNormalizedDir();
       }
+    }
+
+    isWithinBound()
+    {
+      let threshold = 10;
+      return mouseX > threshold && mouseX < width - threshold && mouseY > threshold && mouseY < height - threshold;
     }
   
     look(obstructionsArray) 
