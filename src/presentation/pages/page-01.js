@@ -36,7 +36,7 @@ function draw() {
   clear();
   background('rgb(240,240,240)');
 
-  TextUtil.setSlideText('01. \nObject emits rays of light. Our eye receives the rays to form a perception.\n\n');
+  TextUtil.setSlideText('01. \nObject reflects rays of light. Our eye receives the rays to form a perception.\n\n');
 
   for (let obstruction of obstructions) {
     obstruction.show();
