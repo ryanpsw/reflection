@@ -4,7 +4,7 @@ class CustomSlider
     {
       this.a = createVector(x1, y1);
       this.b = createVector(x2, y2);
-      this.pos = createVector((x1 + x2) / 2, (y1 + y2) / 2); 
+      this.pos = this.a.copy();
 
       this.imgHandle = imgHandle;
       this.isDragging = false;
@@ -28,6 +28,13 @@ class CustomSlider
         }
     }
 
+    getPercent() // 0 - 1
+    {
+        let total = this.b.copy().sub(this.a);
+        let current = this.pos.copy().sub(this.a);
+        return current.mag()/total.mag();
+    }
+
     show() 
     {
         if(this.shouldShowBar)
@@ -36,6 +43,8 @@ class CustomSlider
             line(this.a.x, this.a.y, this.b.x, this.b.y);
         }
 
+        push();
+        tint(255, 150);
         if(!this.isVertical)
         {
             image(this.imgHandle, this.pos.x - this.imgHandle.width/2, this.pos.y);
@@ -44,6 +53,7 @@ class CustomSlider
         {
             image(this.imgHandle, this.pos.x, this.pos.y - this.imgHandle.height/2);
         }
+        pop();
     }
 
     checkMousePressed()

@@ -16,12 +16,12 @@ function setup()
 
   //TextUtil.setNextPageHyperLink('07');
 
-  box = new Box(400, 420, imgEyeNormal.width, imgEyeNormal.height, imgEyeNormal, imgEyeHit);
+  eye = new Box(400, 420, imgEyeNormal.width, imgEyeNormal.height, imgEyeNormal, imgEyeHit);
 
   obstructions = [];
   obstructions[0] = new Mirror(325, 240, 325, 360);
   obstructions[1] = new Mirror(475, 240, 475, 360);
-  obstructions[2] = box;
+  obstructions[2] = eye;
 
   rayEmitter = new RayEmitter(
     createVector(400, 210), 
@@ -29,9 +29,10 @@ function setup()
     true, 
     imgGemSmall, 
     true, 
-    null);
+    null,
+    true);
 
-  virtualRay = new VirtualRay(rayEmitter, box, false, 120); // 120 is 'x'
+  virtualRay = new VirtualRay(rayEmitter, eye, false, 120); // 120 is 'x'
 
   formulaStr = "";
 }
@@ -51,7 +52,7 @@ function draw() {
   rayEmitter.show();
 
   virtualRay.tryShow();
-  formulaStr = TextUtil.getLineSegmentFormula(rayEmitter, virtualRay, box);
+  formulaStr = TextUtil.getLineSegmentFormula(rayEmitter, virtualRay, eye);
 }
 
 function mousePressed() {

@@ -23,6 +23,7 @@ class TextUtil
     static setSlideText(str)
     {
         push();
+        noStroke();
         textSize(20);
         fill('black');
         textStyle(NORMAL);
