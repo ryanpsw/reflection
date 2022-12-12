@@ -41,7 +41,7 @@ function draw() {
   clear();
   background('rgb(240,240,240)');
 
-  TextUtil.setSlideText('07. \nTODO TODO \nTO DO \n\n' + formulaStr);
+  TextUtil.setSlideText('07. \nLet\'s have some fun with 2 mirrors facing each other. How many gems would you see? \n\n' + formulaStr);
 
   for (let obstruction of obstructions) {
     obstruction.show();
@@ -53,6 +53,8 @@ function draw() {
 
   virtualRay.tryShow();
   formulaStr = TextUtil.getLineSegmentFormula(rayEmitter, virtualRay, eye);
+
+  TextUtil.setFooterText("(The slides end here. Thank you! )", 500, 500);
 }
 
 function mousePressed() {

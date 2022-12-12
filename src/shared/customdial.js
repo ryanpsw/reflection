@@ -1,4 +1,4 @@
-const touchRadius = 30;
+const touchRadius = 20;
 
 class CustomDial
 {

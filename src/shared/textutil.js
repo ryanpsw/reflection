@@ -37,4 +37,16 @@ class TextUtil
         let a = createA('page-'+ nextPageNumStr+'.html', 'Next Page');
         a.position(700, 550);
     }
+
+    static setFooterText(str)
+    {
+        push();
+        noStroke();
+        textSize(20);
+        fill('black');
+        textStyle(NORMAL);
+        textWrap(WORD);
+        text(str, 30, 550, width-50);
+        pop();
+    }
 }
