@@ -2,7 +2,7 @@ const _SCALAR = 500;
 
 class Ray 
 {
-    constructor(pos, dir, charNum) 
+    constructor(pos, dir, charNum, shouldDrawAngle) 
     {
         this.pos = pos;
         this.dir = dir;
@@ -14,6 +14,8 @@ class Ray
         this.shortestDistanceObstruction = null;
         this.shortestDistanceToObstruction = Infinity;
         this.shortestIntersectPoint = null;
+
+        this.shouldDrawAngle = shouldDrawAngle;
     }
   
     lookAt(x, y) 
@@ -103,6 +105,8 @@ class Ray
             let midPoint = createVector((this.pos.x + this.curEndpoint.x) /2, (this.pos.y + this.curEndpoint.y) /2);
             LineRenderer.drawLetter(midPoint, this.charNum, rayColor);
         }
+
+        this.tryDrawAngle();
     }
   
     cast(obstructionsArray) 
@@ -132,6 +136,41 @@ class Ray
         }
 
         this.tryApplyObstructionWithShortestDistance(obstructionsArray);
+    }
+
+    //-----------------------------------------------------------------
+    // WARNING: ONLY WORK ON FLAT MIRRORS :P THIS IS BASICALLY A HACK
+    //-----------------------------------------------------------------
+    tryDrawAngle()
+    {
+        if(this.shouldDrawAngle && this.reflectedRay && this.shortestDistanceObstruction)
+        {
+            angleMode(RADIANS);
+            let mirrorVector = this.shortestDistanceObstruction.a.copy().sub(this.shortestDistanceObstruction.b);
+            let angleBetweenMirrorAndRay = mirrorVector.angleBetween(this.dir.copy().mult(-1));
+            let angleBetweenMirrorAndFlatGround = PI - mirrorVector.angleBetween(createVector(-1, 0));
+
+            push();
+            let c = color(225, 80, 60, 170);
+            translate(this.curEndpoint.x, this.curEndpoint.y);
+            noStroke();
+            fill(c);
+            rotate(angleBetweenMirrorAndFlatGround);
+            arc(0, 0, 70, 70, 0, angleBetweenMirrorAndRay, PIE);
+            rotate((PI-angleBetweenMirrorAndRay));
+            arc(0, 0, 70, 70, 0, angleBetweenMirrorAndRay, PIE);
+            pop();
+
+            push();
+            noStroke();
+            textSize(20);
+            fill('black');
+            textStyle(NORMAL);
+            textWrap(WORD);
+            text('θ', this.curEndpoint.x-60, this.curEndpoint.y-10);
+            text('θ', this.curEndpoint.x+60, this.curEndpoint.y-10);
+            pop();
+        }
     }
 
     checkIntersectWithObstruction(obstruction) 

@@ -2,10 +2,10 @@ const dragTouchRadius = 50;
 
 class RayEmitter
  {
-    constructor(pos, normalizedDirection, isRayVisible, image, shouldShowDial, imgDragMe, shouldShowLetterCharNum) 
+    constructor(pos, normalizedDirection, isRayVisible, image, shouldShowDial, imgDragMe, shouldShowLetterCharNum, shouldDrawAngle) 
     {
       this.pos = pos;
-      this.ray = new Ray(this.pos, normalizedDirection, shouldShowLetterCharNum); 
+      this.ray = new Ray(this.pos, normalizedDirection, shouldShowLetterCharNum, shouldDrawAngle); 
       this.isRayVisible = isRayVisible;
       this.image = image;
 
