@@ -15,6 +15,7 @@ function setup()
   createCanvas(800, 600);
 
   //TextUtil.setNextPageHyperLink('07');
+  TextUtil.setPrevPageHyperLink('06');
 
   eye = new Box(400, 420, imgEyeNormal.width, imgEyeNormal.height, imgEyeNormal, imgEyeHit);
 

@@ -16,6 +16,7 @@ function setup()
   createCanvas(800, 600);
 
   TextUtil.setNextPageHyperLink('05');
+  TextUtil.setPrevPageHyperLink('03');
 
   //--------------------------------------------
   // Diagram on the left

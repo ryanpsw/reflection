@@ -34,8 +34,14 @@ class TextUtil
 
     static setNextPageHyperLink(nextPageNumStr)
     {
-        let a = createA('page-'+ nextPageNumStr+'.html', 'Next Page');
+        let a = createA('page-'+ nextPageNumStr+'.html', 'Next Page >');
         a.position(700, 550);
+    }
+
+    static setPrevPageHyperLink(prevPageNumStr)
+    {
+        let a = createA('page-'+ prevPageNumStr+'.html', '< Previous Page');
+        a.position(30, 550);
     }
 
     static setFooterText(str)
@@ -46,7 +52,7 @@ class TextUtil
         fill('black');
         textStyle(NORMAL);
         textWrap(WORD);
-        text(str, 30, 550, width-50);
+        text(str, 30, 520, width-50);
         pop();
     }
 }
